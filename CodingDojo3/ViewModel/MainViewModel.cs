@@ -28,7 +28,8 @@ namespace CodingDojo3.ViewModel
         public List<ItemViewModel> Items { get; set; }
         public ObservableCollection<ItemViewModel> SensorList { get; set; }
         public ObservableCollection<ItemViewModel> ActorList { get; set; }
-        public ObservableCollection<string> ModeDropdownList { get; set; }
+        public ObservableCollection<string> SensorModeDropdownList { get; private set; }
+        public ObservableCollection<string> ActorModeDropdownList { get; private set; }
 
         //kennen sich zur Laufzeit nicht
         //private Simulator sim = new Simulator(items);
@@ -58,15 +59,16 @@ namespace CodingDojo3.ViewModel
             this.Items = new List<ItemViewModel>();
             SensorList = new ObservableCollection<ItemViewModel>();
             ActorList = new ObservableCollection<ItemViewModel>();
-            ModeDropdownList = new ObservableCollection<string>();
+            SensorModeDropdownList = new ObservableCollection<string>();
+            ActorModeDropdownList = new ObservableCollection<string>();
 
             foreach (var item in Enum.GetNames(typeof(SensorModeType)))
             {
-                ModeDropdownList.Add(item);
+                SensorModeDropdownList.Add(item);
             }
             foreach (var item in Enum.GetNames(typeof(ModeType)))
             {
-                ModeDropdownList.Add(item);
+                ActorModeDropdownList.Add(item);
             }
 
             this._dateTimer = new DispatcherTimer();

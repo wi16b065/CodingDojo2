@@ -61,7 +61,6 @@ namespace CodingDojo3.ViewModel
                     (baseItem as BaseSensor).SensorMode = (SensorModeType)Enum.Parse(typeof(SensorModeType), value, false);
                 if (baseItem is IActuator)
                     (baseItem as BaseActuator).ActuatorMode = (ModeType)Enum.Parse(typeof(ModeType), value, false);
-
                 RaisePropertyChanged();
             }
         }
