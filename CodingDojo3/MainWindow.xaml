@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CodingDojo3"
         xmlns:ViewModel="clr-namespace:CodingDojo3.ViewModel" x:Class="CodingDojo3.MainWindow"
         mc:Ignorable="d"
-        Title="Smart Home System" Height="900" Width="750">
+        Title="Smart Home System" Height="900" Width="850">
     <!--END master grid-->
 
     <Window.DataContext>
@@ -41,7 +41,30 @@
                     <Button Content="Löschen" Background="Black" Margin="8,10,8,10" Height="35" BorderBrush="White" Foreground="White"/>
                 </StackPanel>
                 <Label Content="Sensoren"   Foreground="White" />
-                <DataGrid MinHeight="300" ItemsSource="{Binding SensorList}"/>
+                <DataGrid MinHeight="300" ItemsSource="{Binding SensorList}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding ID}" Header="ID"/>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
+                        <DataGridTextColumn Binding="{Binding Description}" Header="Description"/>
+                        <DataGridTextColumn Binding="{Binding Room}" Header="Room"/>
+                        <!--Manually define Column in Datagrid -> Mode od specific item should be displayed + Dropdownoption to change Mode-->
+                        <DataGridTemplateColumn Header="Mode">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding Mode}"></Label>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            <!--Setting ItemSource for the Dropdown + Binding-->
+                            <DataGridTemplateColumn.CellEditingTemplate>
+                                <DataTemplate>
+                                    <ComboBox SelectedItem="{Binding Mode, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Datacontext.ModeDropdownList}"></ComboBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellEditingTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Binding="{Binding ValueType}" Header="ValueType"/>
+                    </DataGrid.Columns>
+
+                </DataGrid>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button HorizontalAlignment="Right" Content="Hinzufügen" Background="Black" Margin="8,10,8,10" Height="35" BorderBrush="White" Foreground="White"/>
                     <Button Content="Löschen" Background="Black" Margin="8,10,8,10" Height="35" BorderBrush="White" Foreground="White"/>

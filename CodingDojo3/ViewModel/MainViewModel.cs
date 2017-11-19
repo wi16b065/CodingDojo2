@@ -23,13 +23,12 @@ namespace CodingDojo3.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        /// <summary>
-        /// Initializes a new instance of the MainViewModel class.
-        /// </summary>
-        
 
 
         public List<ItemViewModel> Items { get; set; }
+        public ObservableCollection<ItemViewModel> SensorList { get; set; }
+        public ObservableCollection<ItemViewModel> ActorList { get; set; }
+        public ObservableCollection<string> ModeDropdownList { get; set; }
 
         //kennen sich zur Laufzeit nicht
         //private Simulator sim = new Simulator(items);
@@ -52,26 +51,22 @@ namespace CodingDojo3.ViewModel
 
         private DispatcherTimer _dateTimer;
 
-        public ObservableCollection<ItemViewModel> SensorList { get; set; }
-        public ObservableCollection<ItemViewModel> ActorList { get; set; }
-        public ObservableCollection<string> ModeSelectionList { get; }
+       
 
         public MainViewModel()
         {
             this.Items = new List<ItemViewModel>();
             SensorList = new ObservableCollection<ItemViewModel>();
             ActorList = new ObservableCollection<ItemViewModel>();
-            ModeSelectionList = new ObservableCollection<string>();
+            ModeDropdownList = new ObservableCollection<string>();
 
-            //Fill ModeSelectionList
             foreach (var item in Enum.GetNames(typeof(SensorModeType)))
             {
-                ModeSelectionList.Add(item);
+                ModeDropdownList.Add(item);
             }
             foreach (var item in Enum.GetNames(typeof(ModeType)))
             {
-                ModeSelectionList.Add(item);
-
+                ModeDropdownList.Add(item);
             }
 
             this._dateTimer = new DispatcherTimer();
